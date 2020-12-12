@@ -117,7 +117,7 @@ let paging=document.querySelectorAll('.paging i');
     // play slide
     function playSlide(){
         setTimeout(() => {
-            console.log((currentImageIndex()+1));
+            //console.log((currentImageIndex()+1));
             rightPaging(currentImageIndex()+1);
             //changeActiveStyle(currentImageIndex()+1);
             playSlide();
