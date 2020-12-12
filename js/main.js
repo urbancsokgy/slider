@@ -7,6 +7,7 @@ const rightArrow=document.querySelector('.fa-chevron-circle-right');
 const image=document.querySelector('.img__holder');
 const caption=document.querySelector('.caption');
 const upperC=document.querySelector('.upper__counter');
+const body=document.querySelector('body');
 
 
 let leftImage;
@@ -32,25 +33,30 @@ let paging=document.querySelectorAll('.paging i');
     // init, mert a background-image-et nem olvass elsőre
     imgStyle=`url('../img/img${1}.jpg')`;
     imgStyle=image.style.backgroundImage;
-    console.log(imgStyle);
+    body.addEventListener('load',playSlide());
+    
+    
     leftImage=1;
     paging[0].classList.toggle('img__active');
     const pagingList=document.querySelectorAll('.paging i');
+    
         
     // Jelenlegi kép indexe
     const currentImageIndex=()=>{
         imgStyle=image.style.backgroundImage;
         let number=Number(imgStyle.split('').filter(item=>Number.isInteger(Number(item))).join(''));
         (number==0)?number++:'';
-        console.log('current image index: '+Number(number));
-       
         return number;
     }
-   
-
+    
+    
     // Kép megváltoztatása
     const changeImage=(number)=>{
-        image.style.backgroundImage=`url('../img/img${number}.jpg')`;
+        image.classList.toggle('transition')
+        setTimeout(()=>{
+            image.style.backgroundImage=`url('../img/img${number}.jpg')`;
+            image.classList.toggle('transition')
+        }, 200)
         
     }
     // aktív pötty színezése
@@ -60,7 +66,7 @@ let paging=document.querySelectorAll('.paging i');
         leftImage=number;
         
     }
-    // felső számláló és alsó caption kiírás
+    // felső számláló és alsó caption kiírás + paging style toogle hívása
     const upperCounter=(number)=>{upperC.textContent=
         `${number}/${imgArray.length}`;
         caption.textContent=`${number}. Kép`
@@ -88,7 +94,7 @@ let paging=document.querySelectorAll('.paging i');
         imgIndex=currentImageIndex();   
         imgIndex--;
         (imgIndex<=1)?imgIndex=10:''; 
-        console.log(imgIndex);
+        
         changeImage(imgIndex);
         upperCounter(imgIndex);
     };
@@ -108,5 +114,14 @@ let paging=document.querySelectorAll('.paging i');
     paging.forEach(element => {
         element.addEventListener('click', pagingClick)
     });
+    // play slide
+    function playSlide(){
+        setTimeout(() => {
+            console.log((currentImageIndex()+1));
+            rightPaging(currentImageIndex()+1);
+            //changeActiveStyle(currentImageIndex()+1);
+            playSlide();
+        }, 4000);
+    }
 }
 )()

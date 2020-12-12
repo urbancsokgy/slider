@@ -120,7 +120,12 @@ h1{
     position: absolute;
     left: 0;
     top: 0;
+    opacity: 1;
+    transition: opacity 1s ease-out;
    
+}
+.transition{
+    opacity: 0;
 }
 .caption{
     position: absolute;    
