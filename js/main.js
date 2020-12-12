@@ -31,7 +31,7 @@ let paging=document.querySelectorAll('.paging i');
 (function(){
     
     // init, mert a background-image-et nem olvass elsőre
-    imgStyle=`url('../img/img${1}.jpg')`;
+    imgStyle=`url('img/img${1}.jpg')`;
     imgStyle=image.style.backgroundImage;
     body.addEventListener('load',playSlide());
     
@@ -54,7 +54,7 @@ let paging=document.querySelectorAll('.paging i');
     const changeImage=(number)=>{
         image.classList.toggle('transition')
         setTimeout(()=>{
-            image.style.backgroundImage=`url('../img/img${number}.jpg')`;
+            image.style.backgroundImage=`url('img/img${number}.jpg')`;
             image.classList.toggle('transition')
         }, 200)
         
